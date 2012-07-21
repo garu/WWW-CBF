@@ -71,10 +71,6 @@ __END__
 
 WWW::CBF - Brazilian Football Championship status
 
-=head1 VERSION
-
-Version 0.01
-
 =head1 SYNOPSIS
 
     use WWW::CBF;
