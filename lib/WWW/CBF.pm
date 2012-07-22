@@ -62,6 +62,8 @@ sub pos {
 
 42;
 __END__
+=encoding utf8
+
 =head1 NAME
 
 WWW::CBF - Brazilian Football Championship status
