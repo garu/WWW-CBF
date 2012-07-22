@@ -1,10 +1,11 @@
 package WWW::CBF;
+use warnings;
+use strict;
+
+use utf8::all;
 use URI;
 use Web::Scraper;
 eval 'use HTML::TreeBuilder::LibXML';
-
-use warnings;
-use strict;
 
 our $VERSION = '0.01';
 
@@ -25,7 +26,7 @@ sub new {
 
 sub reload {
 	my $self = shift;
-	my $url = 'http://www.cbf.com.br/seriea/indexa.html';
+	my $url = 'http://www.cbf.com.br/competicoes/campeonato-brasileiro/serie-a/2012';
 
 	my $site = $cbf->scrape( URI->new($url) );
 
@@ -36,22 +37,16 @@ sub reload {
 		# get values from scraper
 		$self->{$pos} = {
 			clube    => $clube->{dados}->[1],
-		    pontos   => $clube->{dados}->[2],
-			jogos    => $clube->{dados}->[3],
-			vitorias => $clube->{dados}->[4],
-		    gp       => $clube->{dados}->[5],
-			gc       => $clube->{dados}->[6],
-			sg       => $clube->{dados}->[7],
-			ap       => $clube->{dados}->[8],
+			pontos   => $clube->{dados}->[3],
+			jogos    => $clube->{dados}->[4],
+			vitorias => $clube->{dados}->[5],
+			empates  => $clube->{dados}->[6],
+			derrotas => $clube->{dados}->[7],
+			gp       => $clube->{dados}->[8],
+			gc       => $clube->{dados}->[9],
+			sg       => $clube->{dados}->[10],
+			ap       => $clube->{dados}->[11],
 		};
-
-		# infer other values from championship rules
-		$self->{$pos}->{empates} = $self->{$pos}->{pontos}
-		                         - ($self->{$pos}->{vitorias} * 3)
-		                         ;
-		$self->{$pos}->{derrotas} = $self->{$pos}->{vitorias}
-		                          - $self->{$pos}->{empates}
-		                          ;
 	}
 
 	return $self;
