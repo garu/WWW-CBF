@@ -7,7 +7,7 @@ use URI;
 use Web::Scraper;
 eval 'use HTML::TreeBuilder::LibXML';
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 my $cbf = scraper {
 	process 'tr', 'clubes[]' => scraper {
